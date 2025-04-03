@@ -14,7 +14,7 @@ const commentSlice = createSlice({
         id: Date.now(),
         note: action.payload.note,   
         texte: action.payload.texte, 
-        completed: false,
+        completed: true,
       });
     },
     

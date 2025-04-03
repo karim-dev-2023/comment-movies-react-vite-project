@@ -1,4 +1,6 @@
-
+.conteneur{
+  width: 36rem;
+}
 .imageCard{
   height: 350px;
   object-fit: fill;
