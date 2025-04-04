@@ -1,4 +1,4 @@
 .imageCard{
   height: 350px;
-  object-fit: fill;
+  object-fit: cover;
 }
