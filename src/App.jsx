@@ -1,19 +1,14 @@
-import {
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap/";
+import { Container, Row, Col } from "react-bootstrap/";
 import "./App.css";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "./redux/commentSlice";
-import { selectComment } from "./redux/selectors";
+import { selectComment } from "./redux/commentSlice";
 
 import MovieCard from "./components/MovieCard.jsx";
 import CommentForm from "./components/CommentForm.jsx";
 import CommentList from "./components/CommentList.jsx";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -29,9 +24,15 @@ function App() {
         if (!res.ok) throw new Error(`Erreur HTTP ${res.status}`);
         return res.json();
       })
-      .then(setApi)
-      .catch(() => {
-        setError("Une erreur s'est produite lors du chargement. Réessayez plus tard.");
+      .then((data) => {
+        setApi(data[0]); // On prend le 1er élément du tableau
+      })
+      
+      .catch((error) => {
+        setError(
+          "Une erreur s'est produite lors du chargement. Réessayez plus tard."
+        );
+        console.log(error);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -44,13 +45,13 @@ function App() {
   if (loading) return <p>Chargement...</p>;
 
   return (
-    <Container fluid className="d-flex justify-content-center align-items-center mb-5 conteneur">
+    <Container
+      fluid
+      className="d-flex justify-content-center align-items-center mb-5 conteneur"
+    >
       <Row>
-        <Col>
-          {apiMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-
+        <Col md={{ span: 6, offset: 3 }}>
+          {apiMovies && <MovieCard key={apiMovies.id} movie={apiMovies} />}
           <h1 className="mt-2">Commentaires</h1>
           <CommentForm onSubmit={handleAddComment} />
           <CommentList comments={comments} />

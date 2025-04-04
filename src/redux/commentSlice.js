@@ -28,3 +28,6 @@ const commentSlice = createSlice({
 // Exportation des actions et du reducer
 export const { addComment, deleteComment } = commentSlice.actions;
 export default commentSlice.reducer;
+// Sélectionne toutes les tâches
+export const selectComment = (state) => state.comment;
+
