@@ -27,7 +27,12 @@ function CommentForm({ onSubmit }) {
 
   const handleFormSubmit = (data) => {
     onSubmit(data);
-    reset(); // vide les champs après soumission
+    reset(
+      {
+        cgu: false,
+      },
+      
+    );
   };
 
   return (
